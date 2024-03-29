@@ -1,0 +1,1 @@
+### Components: React mein sab kuch components ke around build hota hai. Components small, reusable, aur independent units hote hain jo UI ko represent karte hain. Aapko functional components aur class components dono ka istemal karna seekhna chahiye.
