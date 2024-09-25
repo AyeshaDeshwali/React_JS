@@ -36,43 +36,77 @@ function Navbar(props) {
                 </Link>
               </li>
             </ul>
-            <div className="d-flex me-2">
+            <div className="d-flex me-  2">
               <div
                 className="bg-primary"
-                onClick={() => {
-                  props.toggleMode("primary");
+                onClick={() => props.toggleMode("primary")}
+                style={{
+                  height: "30px",
+                  width: "30px",
+                  cursor: "pointer",
+                  borderRadius: "5px",
+                  marginRight: "10px",
                 }}
-                style={{ height: "30px", width: "30px" }}
-              >
-                {" "}
-              </div>
+              ></div>
               <div
                 className="bg-danger"
-                onClick={() => {
-                  props.toggleMode("danger");
+                onClick={() => props.toggleMode("danger")}
+                style={{
+                  height: "30px",
+                  width: "30px",
+                  cursor: "pointer",
+                  borderRadius: "5px",
+                  marginRight: "10px",
                 }}
-                style={{ height: "30px", width: "30px" }}
-              >
-                {" "}
-              </div>
+              ></div>
               <div
                 className="bg-success"
-                onClick={() => {
-                  props.toggleMode("success");
+                onClick={() => props.toggleMode("success")}
+                style={{
+                  height: "30px",
+                  width: "30px",
+                  cursor: "pointer",
+                  borderRadius: "5px",
+                  marginRight: "10px",
                 }}
-                style={{ height: "30px", width: "30px" }}
-              >
-                {" "}
-              </div>
+              ></div>
               <div
                 className="bg-warning"
-                onClick={() => {
-                  props.toggleMode("warning");
+                onClick={() => props.toggleMode("warning")}
+                style={{
+                  height: "30px",
+                  width: "30px",
+                  cursor: "pointer",
+                  borderRadius: "5px",
+                  marginRight: "10px",
                 }}
-                style={{ height: "30px", width: "30px" }}
-              >
-                {" "}
-              </div>
+              ></div>
+              <div
+                className="bg-dark"
+                onClick={() => props.toggleMode("dark")}
+                style={{
+                  height: "30px",
+                  width: "30px",
+                  cursor: "pointer",
+                  borderRadius: "5px",
+                  border: "1px solid white",
+                  marginRight: "10px",
+                  color: "white",
+                }}
+              ></div>
+              <div
+                className="bg-light"
+                onClick={() => props.toggleMode("light")}
+                style={{
+                  height: "30px",
+                  width: "30px",
+                  cursor: "pointer",
+                  border: "1px solid black",
+                  borderRadius: "5px",
+                  marginRight: "10px",
+                  color: "black",
+                }}
+              ></div>
             </div>
 
             <div
@@ -84,7 +118,9 @@ function Navbar(props) {
                 className="form-check-input"
                 type="checkbox"
                 id="flexSwitchCheckDefault"
-                onClick={props.toggleMode}
+                onClick={() => {
+                  props.toggleMode();
+                }}
               />
             </div>
           </div>

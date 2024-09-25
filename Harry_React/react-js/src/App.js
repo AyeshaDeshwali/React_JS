@@ -21,11 +21,14 @@ function App() {
     }, 2000);
   };
   const removeBodyClasses = () => {
-    document.body.classList.remove("bg-danger");
-    document.body.classList.remove("bg-success");
-    document.body.classList.remove("bg-primary");
-    document.body.classList.remove("bg-dark");
-    document.body.classList.remove("bg-light");
+    document.body.classList.remove(
+      "bg-primary",
+      "bg-danger",
+      "bg-success",
+      "bg-warning",
+      "bg-dark",
+      "bg-light"
+    );
   };
 
   const toggleMode = (cls) => {

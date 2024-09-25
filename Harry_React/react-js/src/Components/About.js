@@ -25,11 +25,11 @@ function About() {
   return (
     <div className="container mt-5 " style={myStyle}>
       <h2 className="my-3">About Us</h2>
-      <div class="accordion" id="accordionExample" style={myStyle}>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
+      <div className="accordion" id="accordionExample" style={myStyle}>
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="headingOne">
             <button
-              class="accordion-button"
+              className="accordion-button"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapseOne"
@@ -42,11 +42,11 @@ function About() {
           </h2>
           <div
             id="collapseOne"
-            class="accordion-collapse collapse show"
+            className="accordion-collapse collapse show"
             aria-labelledby="headingOne"
             data-bs-parent="#accordionExample"
           >
-            <div class="accordion-body" style={myStyle}>
+            <div className="accordion-body" style={myStyle}>
               <strong>This is the first item's accordion body.</strong> It is
               shown by default, until the collapse plugin adds the appropriate
               classes that we use to style each element. These classes control
@@ -58,10 +58,10 @@ function About() {
             </div>
           </div>
         </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingTwo">
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="headingTwo">
             <button
-              class="accordion-button collapsed"
+              className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapseTwo"
@@ -74,11 +74,11 @@ function About() {
           </h2>
           <div
             id="collapseTwo"
-            class="accordion-collapse collapse"
+            className="accordion-collapse collapse"
             aria-labelledby="headingTwo"
             data-bs-parent="#accordionExample"
           >
-            <div class="accordion-body" style={myStyle}>
+            <div className="accordion-body" style={myStyle}>
               <strong>This is the second item's accordion body.</strong> It is
               hidden by default, until the collapse plugin adds the appropriate
               classes that we use to style each element. These classes control
@@ -90,10 +90,10 @@ function About() {
             </div>
           </div>
         </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingThree">
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="headingThree">
             <button
-              class="accordion-button collapsed"
+              className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapseThree"
@@ -106,11 +106,11 @@ function About() {
           </h2>
           <div
             id="collapseThree"
-            class="accordion-collapse collapse"
+            className="accordion-collapse collapse"
             aria-labelledby="headingThree"
             data-bs-parent="#accordionExample"
           >
-            <div class="accordion-body" style={myStyle}>
+            <div className="accordion-body" style={myStyle}>
               <strong>This is the third item's accordion body.</strong> It is
               hidden by default, until the collapse plugin adds the appropriate
               classes that we use to style each element. These classes control
@@ -126,7 +126,7 @@ function About() {
       <div className="container">
         <button
           type="button"
-          class="btn btn-primary my-3"
+          className="btn btn-primary my-3"
           onClick={toggleStyle}
         >
           {btnText}
