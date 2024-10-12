@@ -10,6 +10,11 @@ const App = () => {
   const apiKey = process.env.REACT_APP_NEWS_API;
   const [progress, setProgress] = useState(0);
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 7300548a (add files)
   return (
     <div>
       <Router>
@@ -135,3 +140,7 @@ const App = () => {
 };
 
 export default App;
+<<<<<<< HEAD
+=======
+>>>>>>> cd702f24 (add files)
+>>>>>>> 7300548a (add files)
