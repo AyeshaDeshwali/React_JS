@@ -6,6 +6,7 @@ const hbs = require("hbs");
 const port = 5001;
 const Register = require("./models/registers");
 const { cp } = require("fs");
+const { userInfo } = require("os");
 const static_path = path.join(__dirname, "../public");
 const template_path = path.join(__dirname, "./templates/views"); // Correct spelling
 const Partials_path = path.join(__dirname, "./templates/partials"); // Correct spelling
@@ -23,6 +24,11 @@ app.get("/", (req, res) => {
 app.get("/register", (req, res) => {
   res.render("register");
 });
+
+app.get("/login", (req, res) => {
+  res.render("login"); // Assuming you have a login.hbs file
+});
+
 app.post("/register", async (req, res) => {
   try {
     const password = req.body.password;
@@ -50,6 +56,23 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.post("/login", async (req, res) => {
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const useremail = await Register.findOne({ email: email });
+
+    if (useremail && useremail.password === password) {
+      res.status(201).render("slider");
+      // res.send("Login successful");
+    } else {
+      res.send("Invalid Login Details");
+    }
+  } catch (error) {
+    res.status(400).send("Invalid Login Detailsl");
+  }
+});
 console.log(static_path);
 console.log(template_path);
 console.log(Partials_path);
