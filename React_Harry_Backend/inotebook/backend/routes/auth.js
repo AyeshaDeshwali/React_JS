@@ -4,7 +4,9 @@ const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs"); // Import bcrypt for password hashing'
 const jwt = require("jsonwebtoken");
+const fetchuser = require("../middleware/fetchuser");
 const JWT_SECRET = "ayeshaisagoodgirl";
+
 // Route 1: Create a new user
 router.post(
   "/createuser",
@@ -62,9 +64,10 @@ router.post(
   "/login",
   [
     body("email", "Enter a valid email").isEmail(),
-    body("password", "password can not be blank").isLength({ min: 5 }),
+    body("password", "password cannot be blank").isLength({ min: 5 }),
   ],
   async (req, res) => {
+    console.log("Login attempt:", req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -82,7 +85,7 @@ router.post(
       if (!passwordCompare) {
         return res
           .status(400)
-          .json({ error: "Please try to login with credentials" });
+          .json({ error: "Please try to login with credentials...." });
       }
 
       const data = {
@@ -100,5 +103,27 @@ router.post(
     }
   }
 );
+
+// ROUTE 3  -------get loggedin user details user: POST  /api/auth/getuser  login required......................
+
+router.post("/getuser", fetchuser, async (req, res) => {
+  try {
+    let userId = req.user.id;
+
+    // Await the result of findById
+    const user = await User.findById(userId).select("-password"); // Use await here
+
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Send user data (will not include password)
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 module.exports = router;
