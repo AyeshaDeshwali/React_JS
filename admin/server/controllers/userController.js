@@ -4,8 +4,7 @@ const User = require("../models/User");
 // Get all users
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find();
-    // const users = await User.find().sort({ createdAt: -1 }); // piche ke data ko first me dikane ke liye
+    const users = await User.find().sort({ createdAt: -1 });
 
     res.json(users);
   } catch (error) {
@@ -33,16 +32,29 @@ exports.getAllUsers = async (req, res) => {
 // Add a user
 exports.addUser = async (req, res) => {
   try {
-    const { name, email, age, password } = req.body;
+    const { name, email, age, password, phoneNumber, address } = req.body;
 
     // Check if the email already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    const existingUserByEmail = await User.findOne({ email });
+    if (existingUserByEmail) {
       return res.status(400).json({ message: "Email already exists." });
     }
 
+    // Check if the phone number already exists
+    const existingUserByPhone = await User.findOne({ phoneNumber });
+    if (existingUserByPhone) {
+      return res.status(400).json({ message: "Phone number already exists." });
+    }
+
     // Create a new user
-    const newUser = new User({ name, email, age, password });
+    const newUser = new User({
+      name,
+      email,
+      age,
+      password,
+      phoneNumber,
+      address,
+    });
     await newUser.save();
     res.status(201).json(newUser);
   } catch (error) {

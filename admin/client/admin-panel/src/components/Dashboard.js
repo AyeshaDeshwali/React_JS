@@ -7,9 +7,8 @@ const Dashboard = () => {
     revenue: 0,
     issues: 0,
   });
-
   useEffect(() => {
-    fetch("http://localhost:5000/api/dashboard")
+    fetch("http://localhost:5002/api/dashboard")
       .then((response) => response.json())
       .then((data) => setDashboardData(data))
       .catch((error) => console.error("Error fetching data:", error));

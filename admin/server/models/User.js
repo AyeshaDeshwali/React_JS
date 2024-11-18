@@ -4,27 +4,47 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
-      trim: true,
+      required: true, // Make sure 'required' is set to true
     },
     email: {
       type: String,
-      required: true,
-      unique: true,
-      trim: true,
+      required: true, // Make sure 'required' is set to true
     },
     password: {
       type: String,
-      required: true,
-      minlength: 6,
+      required: true, // Make sure 'required' is set to true
     },
     age: {
       type: Number,
-      default: null,
+    },
+
+    dateOfBirth: {
+      type: Number,
     },
     isAdmin: {
       type: Boolean,
       default: false,
+    },
+    image: {
+      type: String, // or Buffer if you're storing the image in MongoDB
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+    },
+    address: {
+      street: {
+        type: String,
+      },
+      city: {
+        type: String,
+      },
+      state: {
+        type: String,
+      },
+      postalCode: {
+        type: String,
+      },
     },
   },
   {
@@ -32,7 +52,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Creating a model from the schema
-const User = mongoose.model("User", userSchema);
-
-module.exports = User;
+module.exports = mongoose.model("User", userSchema);

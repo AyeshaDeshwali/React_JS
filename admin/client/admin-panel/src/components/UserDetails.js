@@ -177,7 +177,7 @@ const UserDetails = () => {
             <th>Age</th>
             <th>Password</th>
             <th>Admin</th>
-            <th>Created At</th>
+            <th>Phone Number</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -190,11 +190,12 @@ const UserDetails = () => {
                 <td>{user.age}</td>
                 <td>{user.password}</td>
                 <td>{user.isAdmin ? "Yes" : "No"}</td>
-                <td>{user.createdAt}</td>
+                <td>{user.phoneNumber}</td>
                 <td>
-                  <button onClick={() => handleDeleteUser(user._id)}>
-                    <i className="fa-solid fa-trash-can"></i>
+                  <button>
+                    <i className="fa-solid fa-magnifying-glass"></i>
                   </button>
+
                   <button
                     onClick={() => {
                       setFormType("edit");
@@ -203,6 +204,9 @@ const UserDetails = () => {
                     }}
                   >
                     <i className="fa-regular fa-pen-to-square"></i>
+                  </button>
+                  <button onClick={() => handleDeleteUser(user._id)}>
+                    <i className="fa-solid fa-trash-can"></i>
                   </button>
                 </td>
               </tr>
