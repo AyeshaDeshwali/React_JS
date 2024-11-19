@@ -8,13 +8,15 @@ const UserForm = ({ type, user, onSave, onCancel }) => {
     age: "",
     password: "",
     isAdmin: false,
-    image: null,
-    address: {
-      street: "",
-      city: "",
-      state: "",
-      postalCode: "",
-    },
+    // image: null,
+    // gender: "",
+    // bio: "",
+    // address: {
+    //   street: "",
+    //   city: "",
+    //   state: "",
+    //   postalCode: "",
+    // },
   });
 
   const [error, setError] = useState(""); // To hold the error message for email validation
@@ -217,8 +219,6 @@ const UserForm = ({ type, user, onSave, onCancel }) => {
           </div>
         </div>
       </div>
-
-      {/* Image Upload and Admin Checkbox */}
       <div className="form-row">
         <div>
           <label>Image</label>
@@ -230,6 +230,21 @@ const UserForm = ({ type, user, onSave, onCancel }) => {
           />
         </div>
         <div>
+          <label htmlFor="bio">Bio</label>
+          <textarea
+            id="bio"
+            name="bio"
+            value={formData.bio} // Bind it to formData
+            onChange={
+              (e) => setFormData({ ...formData, bio: e.target.value }) // Update the bio in formData
+            }
+            placeholder="Enter your bio..."
+          />
+        </div>
+      </div>
+      {/* Image Upload and Admin Checkbox */}
+      <div className="form-row">
+        <div>
           <label>Admin</label>
           <input
             type="checkbox"
@@ -238,6 +253,35 @@ const UserForm = ({ type, user, onSave, onCancel }) => {
               setFormData({ ...formData, isAdmin: e.target.checked })
             }
           />
+        </div>
+        <div>
+          <label>Gender</label>
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="male"
+                checked={formData.gender === "male"} // Check if male is selected
+                onChange={(e) =>
+                  setFormData({ ...formData, gender: e.target.value })
+                }
+              />
+              Male
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="female"
+                checked={formData.gender === "female"} // Check if female is selected
+                onChange={(e) =>
+                  setFormData({ ...formData, gender: e.target.value })
+                }
+              />
+              Female
+            </label>
+          </div>
         </div>
       </div>
 

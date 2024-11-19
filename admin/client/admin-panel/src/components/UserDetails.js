@@ -3,6 +3,7 @@ import { addUser } from "../crud/addUser";
 import { deleteUser } from "../crud/deleteUser";
 import { updateUser } from "../crud/updateUser";
 import UserForm from "./UserForm";
+import { fetchUserDetails } from "../crud/userApi";
 
 const UserDetails = () => {
   const [userData, setUserData] = useState([]);
@@ -11,8 +12,8 @@ const UserDetails = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formType, setFormType] = useState("");
   const [currentUser, setCurrentUser] = useState({});
-
-  // Pagination States
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 10; // Number of records per page
 
@@ -115,8 +116,110 @@ const UserDetails = () => {
     }
   };
 
+  const handleViewDetails = async (userId) => {
+    try {
+      const user = await fetchUserDetails(userId); // Assuming fetchUserDetails is implemented in `userApi.js`
+      setSelectedUser(user);
+      setIsDetailsOpen(true); // Show modal
+    } catch (error) {
+      console.error("Could not fetch user details:", error);
+    }
+  };
   return (
     <section className="users">
+      {isDetailsOpen && selectedUser && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>User Details</h3>
+
+            {/* Name */}
+            {selectedUser.name && (
+              <p>
+                <strong>Name:</strong> {selectedUser.name}
+              </p>
+            )}
+
+            {/* Email */}
+            {selectedUser.email && (
+              <p>
+                <strong>Email:</strong> {selectedUser.email}
+              </p>
+            )}
+
+            {/* Age */}
+            {selectedUser.age && (
+              <p>
+                <strong>Age:</strong> {selectedUser.age}
+              </p>
+            )}
+
+            {/* Phone */}
+            {selectedUser.phoneNumber && (
+              <p>
+                <strong>Phone:</strong> {selectedUser.phoneNumber}
+              </p>
+            )}
+
+            {/* Gender */}
+            {selectedUser.gender && (
+              <p>
+                <strong>Gender:</strong> {selectedUser.gender}
+              </p>
+            )}
+
+            {/* Bio */}
+            {selectedUser.bio && selectedUser.bio.trim() !== "" && (
+              <p>
+                <strong>Bio:</strong> {selectedUser.bio}
+              </p>
+            )}
+
+            {/* Address */}
+            {selectedUser.address && (
+              <>
+                <p>
+                  <strong>
+                    Address: <i className="fa-solid fa-location-dot"></i>
+                  </strong>
+                </p>
+                <div className="address-container">
+                  {/* Street */}
+                  {selectedUser.address.street.trim() !== "" && (
+                    <div className="address-box">
+                      <strong>Street:</strong> {selectedUser.address.street}
+                    </div>
+                  )}
+
+                  {/* City */}
+                  {selectedUser.address.city.trim() !== "" && (
+                    <div className="address-box">
+                      <strong>City:</strong> {selectedUser.address.city}
+                    </div>
+                  )}
+
+                  {/* State */}
+                  {selectedUser.address.state.trim() !== "" && (
+                    <div className="address-box">
+                      <strong>State:</strong> {selectedUser.address.state}
+                    </div>
+                  )}
+
+                  {/* Postal Code */}
+                  {selectedUser.address.postalCode.trim() !== "" && (
+                    <div className="address-box">
+                      <strong>Postal Code:</strong>{" "}
+                      {selectedUser.address.postalCode}
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+
+            <button onClick={() => setIsDetailsOpen(false)}>Close</button>
+          </div>
+        </div>
+      )}
+
       <h2 style={{ textAlign: "center" }}>User List</h2>
 
       {/* Search Box */}
@@ -191,8 +294,9 @@ const UserDetails = () => {
                 <td>{user.password}</td>
                 <td>{user.isAdmin ? "Yes" : "No"}</td>
                 <td>{user.phoneNumber}</td>
+
                 <td>
-                  <button>
+                  <button onClick={() => handleViewDetails(user._id)}>
                     <i className="fa-solid fa-magnifying-glass"></i>
                   </button>
 

@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Dashboard from "./components/Dashboard";
 import UserDetails from "./components/UserDetails";
+// import UserView from "./components/UserView";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/users" element={<UserDetails />} />
+            {/* <Route path="/users/view/:userId" element={<UserView />} /> */}
           </Routes>
           <Footer />
         </div>
