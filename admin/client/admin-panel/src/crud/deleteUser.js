@@ -2,7 +2,7 @@
 export const deleteUser = async (userId) => {
   try {
     const response = await fetch(
-      `http://localhost:5002/api/users/delete/${userId}`,
+      `http://localhost:5003/api/users/delete/${userId}`,
       {
         method: "DELETE",
       }

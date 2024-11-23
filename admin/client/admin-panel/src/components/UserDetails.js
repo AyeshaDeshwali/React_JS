@@ -19,7 +19,7 @@ const UserDetails = () => {
 
   // Fetch the user data on component mount
   useEffect(() => {
-    fetch("http://localhost:5002/api/users")
+    fetch("http://localhost:5003/api/users")
       .then((response) => response.json())
       .then((data) => {
         setUserData(data);

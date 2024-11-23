@@ -32,7 +32,17 @@ exports.getAllUsers = async (req, res) => {
 // Add a user
 exports.addUser = async (req, res) => {
   try {
-    const { name, email, age, password, phoneNumber, address } = req.body;
+    const {
+      name,
+      email,
+      age,
+      password,
+      phoneNumber,
+      gender,
+      image,
+      bio,
+      address,
+    } = req.body;
 
     // Check if the email already exists
     const existingUserByEmail = await User.findOne({ email });
@@ -46,6 +56,8 @@ exports.addUser = async (req, res) => {
       return res.status(400).json({ message: "Phone number already exists." });
     }
 
+    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+
     // Create a new user
     const newUser = new User({
       name,
@@ -53,7 +65,11 @@ exports.addUser = async (req, res) => {
       age,
       password,
       phoneNumber,
+      gender,
+      bio,
+      image,
       address,
+      image: imageUrl,
     });
     await newUser.save();
     res.status(201).json(newUser);
@@ -75,16 +91,62 @@ exports.deleteUser = async (req, res) => {
 };
 
 // Update a user
+// exports.updateUser = async (req, res) => {
+//   try {
+//     const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+//       new: true,
+//     });
+//     if (!updatedUser)
+//       return res.status(404).json({ message: "User not found" });
+//     res.json(updatedUser);
+//   } catch (error) {
+//     res.status(500).json({ message: "Error updating user", error });
+//   }
+// };
+
 exports.updateUser = async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
+    const { id } = req.params;
+
+    // Handle optional file upload
+    const imageUrl = req.file ? `/uploads/${req.file.filename}` : undefined;
+
+    // Extract other fields from the body
+    const { name, email, phoneNumber, age, password, gender, bio, isAdmin } =
+      req.body;
+
+    // Build the update object
+    const updateData = {
+      name,
+      email,
+      phoneNumber,
+      age,
+      password,
+      gender,
+      bio,
+      isAdmin,
+    };
+
+    // Add image URL if new image is uploaded
+    if (imageUrl) {
+      updateData.image = imageUrl;
+    }
+
+    // Find and update the user
+    const updatedUser = await User.findByIdAndUpdate(id, updateData, {
+      new: true, // Return updated document
+      runValidators: true, // Run schema validations
     });
-    if (!updatedUser)
+
+    if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
-    res.json(updatedUser);
+    }
+
+    res.status(200).json({ message: "User updated successfully", updatedUser });
   } catch (error) {
-    res.status(500).json({ message: "Error updating user", error });
+    res
+      .status(500)
+      .json({ message: "Error updating user", error: error.message });
   }
 };
 

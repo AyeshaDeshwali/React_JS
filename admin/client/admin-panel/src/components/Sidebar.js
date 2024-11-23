@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Sidebar.css";
 
 const Sidebar = () => {
+  const [categories, setCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(null);
+
+  useEffect(() => {
+    // Fetch categories
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("http://localhost:5003/api/categories");
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   return (
     <aside className="sidebar">
       <div className="logo">
@@ -19,6 +37,26 @@ const Sidebar = () => {
           </li>
           <li>
             <Link to="/users">Users</Link>
+          </li>
+          <li>
+            <button
+              className="dropdown-toggle btn"
+              style={{ color: "white" }}
+              onClick={() => setActiveCategory((prev) => !prev)}
+            >
+              Categories
+            </button>
+            {activeCategory && (
+              <ul className="dropdown">
+                {categories.map((category) => (
+                  <li key={category._id}>
+                    <Link to={`/categories/${category._id}`}>
+                      {category.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
           <li>
             <Link to="/settings">Settings</Link>

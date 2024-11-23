@@ -7,23 +7,24 @@ const UserForm = ({ type, user, onSave, onCancel }) => {
     email: "",
     age: "",
     password: "",
+    phoneNumber: "",
     isAdmin: false,
-    // image: null,
-    // gender: "",
-    // bio: "",
-    // address: {
-    //   street: "",
-    //   city: "",
-    //   state: "",
-    //   postalCode: "",
-    // },
+    image: "",
+    gender: "",
+    bio: "",
+    address: {
+      street: "",
+      city: "",
+      state: "",
+      postalCode: "",
+    },
   });
 
   const [error, setError] = useState(""); // To hold the error message for email validation
 
   useEffect(() => {
     if (type === "edit" && user) {
-      setFormData(user);
+      setFormData(user); // This should include _id
     }
   }, [type, user]);
 
@@ -31,35 +32,21 @@ const UserForm = ({ type, user, onSave, onCancel }) => {
     e.preventDefault();
 
     try {
-      if (!formData.email) {
-        alert("Email is required");
-        return;
-      }
-      if (!formData.password || formData.password.trim() === "") {
-        alert("Password is required");
-        return;
-      }
-      if (!formData.phoneNumber) {
-        alert("Phone number is required");
+      if (!formData.email || !formData.password || !formData.phoneNumber) {
+        alert("Required fields are missing!");
         return;
       }
 
-      await onSave(formData); // Call parent function for add/update
-      setError(""); // Clear any previous error
+      const formDataToSend = { ...formData }; // Clone the form data
+      await onSave(formDataToSend); // Ensure this sends the entire user object
     } catch (err) {
-      // Check if the error is a network issue or custom message
-      const errorMessage =
-        err.response && err.response.data && err.response.data.message
-          ? err.response.data.message
-          : err.message || "An unexpected error occurred.";
-      setError(errorMessage); // Display the message directly in the form
+      console.error("Error while saving user:", err);
     }
   };
 
   const handleImageChange = (e) => {
-    setFormData({ ...formData, image: e.target.files[0] }); // Correctly set the image file
+    setFormData({ ...formData, image: e.target.files[0] }); // Image ko state mein store karna
   };
-
   return (
     <form onSubmit={handleSubmit}>
       {/* Row 1: Name and Email */}
@@ -228,6 +215,14 @@ const UserForm = ({ type, user, onSave, onCancel }) => {
             id="image"
             onChange={handleImageChange}
           />
+          {formData.image && (
+            <img
+              src={URL.createObjectURL(formData.image)}
+              alt="preview"
+              width="100"
+              height="100"
+            />
+          )}
         </div>
         <div>
           <label htmlFor="bio">Bio</label>

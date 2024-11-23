@@ -26,11 +26,15 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
     image: {
-      type: String, // or Buffer if you're storing the image in MongoDB
+      type: String, // Ensure it's a String to store the file path
+      // required: false,
     },
-    phoneNumber: {
+    phoneNumber: { type: String, unique: false },
+    gender: {
       type: String,
-      required: true,
+    },
+    bio: {
+      type: String,
     },
     address: {
       street: {

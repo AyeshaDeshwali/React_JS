@@ -13,7 +13,7 @@ const UserView = ({ userId, closeModal }) => {
         setUser(userDetails);
         setLoading(false);
       } catch (error) {
-        console.error("Failed to fetch user details:", error);
+        console.error("Failed to fetch user details:,,,,", error);
         setLoading(false);
       }
     };

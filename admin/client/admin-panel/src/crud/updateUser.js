@@ -1,8 +1,10 @@
-// src/crud/updateUser.js
 export const updateUser = async (userId, updatedData) => {
   try {
+    if (!userId) {
+      throw new Error("User ID is missing");
+    }
     const response = await fetch(
-      `http://localhost:5002/api/users/update/${userId}`,
+      `http://localhost:5003/api/users/update/${userId}`,
       {
         method: "PUT",
         headers: {
