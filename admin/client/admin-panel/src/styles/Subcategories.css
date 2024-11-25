@@ -113,8 +113,9 @@
 }
 .star-rating {
   display: flex;
-  align-items: center; /* Align stars and text together */
-  gap: 2px; /* Adds spacing between text and stars */
+  flex-direction: column; /* Stack stars and reviews vertically */
+  align-items: center; /* Center both text and stars horizontally */
+  gap: 5px; /* Space between reviews text and stars */
 }
 .star-rating span {
   margin: 0;

@@ -70,6 +70,9 @@ exports.updateSubCategory = async (req, res) => {
   try {
     console.log(req.body); // Log body data
     const { id } = req.params; // Extract subcategory ID from URL
+    console.log("Update Request Params ID:", id); // Log the ID
+    console.log("Update Request Body:", req.body); // Log the parsed data
+
     const updateData = req.body; // Extract update data from request body
 
     const updatedSubCategory = await SubCategory.findByIdAndUpdate(
@@ -81,6 +84,7 @@ exports.updateSubCategory = async (req, res) => {
     if (!updatedSubCategory) {
       return res.status(404).json({ message: "Subcategory not found" });
     }
+    console.log("Updated Subcategory in DB:", updatedSubCategory);
 
     res.status(200).json(updatedSubCategory);
   } catch (error) {
