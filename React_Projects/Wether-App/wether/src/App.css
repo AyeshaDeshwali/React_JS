@@ -1,0 +1,76 @@
+/* Background and general settings */
+.wetherBg {
+  background-image: url("https://media.istockphoto.com/id/529559049/photo/rainbow-in-blue-sky.jpg?s=612x612&w=0&k=20&c=e9UFkD-PM8YH_qP6Whv838y0Ws1nHAI4CIGMeOj5i-w=");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.heading {
+  color: white;
+  font-weight: 700;
+}
+
+/* Weather Result Box */
+.wetherResultBox {
+  margin: auto;
+  width: 600px; /* Increased width for better box alignment */
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.weathorIcon {
+  margin: 1rem auto; /* Centered the icon */
+  width: 80px;
+  height: 80px;
+}
+
+.weathorCity {
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.weathorTemp {
+  font-size: 40px;
+  font-weight: 700;
+  color: #333;
+  margin: 10px 0;
+}
+
+/* Grid for weather details */
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two items per row */
+  gap: 20px; /* Spacing between boxes */
+  margin-top: 20px;
+}
+
+.detailItem {
+  background-color: #f9f9f9;
+  padding: 10px;
+  padding-top: 15px;
+  display: flex;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Aligns content in the center */
+}
+
+.detailItem h6 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px 0;
+  color: #444;
+}
+
+.detailItem p {
+  font-size: 16px;
+  color: #666;
+  margin-left: 12px;
+  margin-top: 4px;
+}
